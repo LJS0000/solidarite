@@ -4,18 +4,32 @@ const Lists = () => {
 
   return(
     <StListsWrap>
-      <ul>
-        <lt>리스트</lt>
-        <lt>리스트</lt>
-        <lt>리스트</lt>
-        <lt>리스트</lt>
-      </ul>
+      <StList>
+        <h3>
+          <span>1. </span>
+          Rerum voluptatibus et doloremque.
+        </h3>
+        <p>여기에 내용</p>
+      </StList>
     </StListsWrap>
   )
 }
 export default Lists
 
 
-const StListsWrap = styled.div`
-  background-color: aliceblue;
+const StListsWrap = styled.ul`
+  list-style: none;
+  padding: 0;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  padding: 1.25rem;
+`
+const StList = styled.li`
+  & > h3 {
+    > span {
+      color: #3b82f6;
+    }
+  }
 `

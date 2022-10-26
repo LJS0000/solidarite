@@ -11,14 +11,12 @@ const Tab = () => {
 export default Tab
 
 const StBtnWrap = styled.div`
- border-bottom: solid 1px rgba(229,231,235);
+ border-bottom: solid 1px #e5e7eb;
  margin-bottom: .5rem;
   & > button {
     all: unset;
     cursor: pointer;
-    padding: 0.75rem;
-    border-radius: 0.25rem;
-    font-weight: 500;
-    color: rgba(59, 130, 246);
+    padding: .75rem;
+    border-radius: .25rem;
   }
 `

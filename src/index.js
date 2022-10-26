@@ -8,8 +8,8 @@ import Layout from './components/common/Layout';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Layout>
-      <GlobalStyle/>
-      <App/>
+    <GlobalStyle/>
+    <App/>
   </Layout>
 );
 

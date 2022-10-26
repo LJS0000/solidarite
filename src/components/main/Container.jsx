@@ -20,8 +20,8 @@ const Container = () => {
 export default Container
 
 const StTitle = styled.p`
-  color: rgba(107, 114, 128);
-  font-size: 1.5rem;
+  color: #6b7280;
+  font-size: 21px;
   text-align: center;
   margin: 35px 0;
 `

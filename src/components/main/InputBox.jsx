@@ -1,19 +1,34 @@
 import styled from "styled-components"
 
+import { IoSearchSharp } from "react-icons/io5"
+
 const InputBox = () => {
   return(
-    <StInput
-      placeholder="검색어를 입력하세요"
-    />
+    <StInputBox>
+      <IoSearchSharp/>
+      <input
+        placeholder="검색어를 입력하세요"
+      />
+    </StInputBox>
   )
 }
 export default InputBox
 
-const StInput = styled.input`
-  display: block;
+const StInputBox = styled.div`
+  display: flex;
+  align-items: center;
   width: 24rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.25rem;
   margin: 0 auto;
   padding: 1rem;
-  border: 1px solid rgba(229,231,235);
-  border-radius: 0.25rem;
+  color: #b1b1b1;
+  & > input {
+    all: unset;
+    width: 100%;
+    ::placeholder {
+      padding: .5rem;
+      color: #b1b1b1;
+    }
+  }
 `
