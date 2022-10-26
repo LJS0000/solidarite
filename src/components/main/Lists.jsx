@@ -1,50 +1,52 @@
 import styled from "styled-components"
 import { useEffect, useState } from "react"
-import { getA, getB } from "../../api/api"
+import { getLists } from "../../api/api"
 import { useInView } from "react-intersection-observer";
 
 const Lists = () => {
   const [lists, setLists] = useState([]);
   const [offset, setOffset] = useState(0);
+  const [type, setType] = useState('a');
 
   // 무한스크롤
   const [lastRef, lastArticle] = useInView({
     threshold: 0.8,
     triggerOnce: true,
   });
+  
 
   useEffect(()=>{
-    getA(offset)
-    .then((res)=>{
-      setLists(res)
-      setOffset(offset+1)
-    })
-  },[])
-
-  useEffect(()=>{
-    if (lists.length!==0) {
-      getA(offset)
-      .then((res)=>{
-        setLists([...lists, ...res])
-        setOffset(offset+1)
-      })
-    }
+    console.log("요청")
+    console.log(lastArticle);
+if(offset===0 || lastArticle) {
+  getLists(offset, type)
+  .then((res)=>{
+    setLists([...lists, ...res])
+  })
+  setOffset(offset+1)
+}  
+      
+    
+    
   },[lastArticle])
-
-  console.log(lastArticle)
 
   return(
     <StListsWrap>
       {
         lists?.map((article, id)=>{
           return(
-            <StList key={id} ref={lists.length-1?lastRef:null}>
+            
+            <StList 
+              key={id} 
+              ref={lists.length-1? lastRef : null}
+            >
               <h3>
                 <span>{article.id}. </span>
                 {article.title}
               </h3>
               <p>{article.content}</p>
             </StList>
+            
           )
         })
       }

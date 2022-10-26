@@ -1,19 +1,9 @@
 import axios from "../axios/axios";
 
-export const getA = async (offset) => {
+export const getLists = async (offset, type) => {
   try {
-      console.log(offset)
-      const res = await axios.get(`a-posts?page=${offset}`)
+      const res = await axios.get(`${type}-posts?page=${offset}`)
       return res.data
-  } catch (err) {
-      console.log(err)
-  }
-}
-
-export const getB = async () => {
-  try {
-      const res = await axios.get('b-posts?page=0')
-      return res
   } catch (err) {
       console.log(err)
   }
