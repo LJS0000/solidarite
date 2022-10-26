@@ -1,2 +1,1 @@
-Solidarite 
-FE React Test
+Solidarite FE React Test

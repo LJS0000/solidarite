@@ -1,16 +1,53 @@
 import styled from "styled-components"
+import { useEffect, useState } from "react"
+import { getA, getB } from "../../api/api"
+import { useInView } from "react-intersection-observer";
 
 const Lists = () => {
+  const [lists, setLists] = useState([]);
+  const [offset, setOffset] = useState(0);
+
+  // 무한스크롤
+  const [lastRef, lastArticle] = useInView({
+    threshold: 0.8,
+    triggerOnce: true,
+  });
+
+  useEffect(()=>{
+    getA(offset)
+    .then((res)=>{
+      setLists(res)
+      setOffset(offset+1)
+    })
+  },[])
+
+  useEffect(()=>{
+    if (lists.length!==0) {
+      getA(offset)
+      .then((res)=>{
+        setLists([...lists, ...res])
+        setOffset(offset+1)
+      })
+    }
+  },[lastArticle])
+
+  console.log(lastArticle)
 
   return(
     <StListsWrap>
-      <StList>
-        <h3>
-          <span>1. </span>
-          Rerum voluptatibus et doloremque.
-        </h3>
-        <p>여기에 내용</p>
-      </StList>
+      {
+        lists?.map((article, id)=>{
+          return(
+            <StList key={id} ref={lists.length-1?lastRef:null}>
+              <h3>
+                <span>{article.id}. </span>
+                {article.title}
+              </h3>
+              <p>{article.content}</p>
+            </StList>
+          )
+        })
+      }
     </StListsWrap>
   )
 }
@@ -27,6 +64,13 @@ const StListsWrap = styled.ul`
   padding: 1.25rem;
 `
 const StList = styled.li`
+  padding: 1rem;
+  & > p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
   & > h3 {
     > span {
       color: #3b82f6;
