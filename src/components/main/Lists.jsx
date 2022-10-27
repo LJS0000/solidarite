@@ -16,16 +16,25 @@ const Lists = ({type, inputText}) => {
     triggerOnce: true,
   });
   
-  // 마운트 및 무한스크롤 업데이트
+  // 마운트 및 서치, 타입 업데이트
   useEffect(()=>{
-    if (offset===0 || lastArticle) {
+    getLists(0, inputText, type)
+    .then((res)=>{
+      setLists(res)
+    })
+    setOffset(1)
+  },[inputText, type])
+
+  // 무한스크롤
+  useEffect(()=>{
+    if (lastArticle) {
       getLists(offset, inputText, type)
       .then((res)=>{
         setLists([...lists, ...res])
       })
       setOffset(offset+1)
     }
-  },[lastArticle])
+  },[lastArticle, inputText])
   
   return(
     <StListsContainer>

@@ -12,7 +12,7 @@ const MainContainer = () => {
   return(
     <>
       <StTitle>게시물을 검색해보세요</StTitle>
-      <InputBox setInputText={setInputText}/>
+      <InputBox setInputText={setInputText} inputText={inputText}/>
       <StArticle>
         <Tab setType={setTtpe}/>
         <Lists type={type} inputText={inputText}/>
