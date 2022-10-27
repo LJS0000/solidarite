@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { useInView } from "react-intersection-observer";
 import { getLists } from "../../api/api";
 
-const Lists = ({type}) => {
+const Lists = ({type, inputText}) => {
   const navigate = useNavigate();
 
   const [lists, setLists] = useState([]);
@@ -15,18 +15,18 @@ const Lists = ({type}) => {
     threshold: 0.8,
     triggerOnce: true,
   });
-    
+  
+  // 마운트 및 무한스크롤 업데이트
   useEffect(()=>{
-    if(offset===0 || lastArticle) {
-      getLists(offset, type)
+    if (offset===0 || lastArticle) {
+      getLists(offset, inputText, type)
       .then((res)=>{
         setLists([...lists, ...res])
       })
       setOffset(offset+1)
-    }  
-  },[lastArticle, type])
-
-
+    }
+  },[lastArticle])
+  
   return(
     <StListsContainer>
       {

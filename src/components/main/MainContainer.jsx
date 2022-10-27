@@ -7,14 +7,15 @@ import Tab from "./Tab"
 const MainContainer = () => {
 
   const [type, setTtpe] = useState('a');
+  const [inputText, setInputText] = useState('');
 
   return(
     <>
       <StTitle>게시물을 검색해보세요</StTitle>
-      <InputBox/>
+      <InputBox setInputText={setInputText}/>
       <StArticle>
         <Tab setType={setTtpe}/>
-        <Lists type={type}/>
+        <Lists type={type} inputText={inputText}/>
       </StArticle>
     </>
   )

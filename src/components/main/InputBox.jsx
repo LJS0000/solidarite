@@ -1,12 +1,16 @@
 import styled from "styled-components"
-
 import { IoSearchSharp } from "react-icons/io5"
+import { useState } from "react"
 
-const InputBox = () => {
+const InputBox = ({setInputText}) => {
+
   return(
     <StInputBox>
       <IoSearchSharp/>
       <input
+        onChange={(e)=>{
+          setInputText(e.target.value)
+        }}
         placeholder="검색어를 입력하세요"
       />
     </StInputBox>
