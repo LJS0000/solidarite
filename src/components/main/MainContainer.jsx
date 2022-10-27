@@ -14,7 +14,7 @@ const MainContainer = () => {
       <StTitle>게시물을 검색해보세요</StTitle>
       <InputBox setInputText={setInputText} inputText={inputText}/>
       <StArticle>
-        <Tab setType={setTtpe}/>
+        <Tab setType={setTtpe} type={type}/>
         <Lists type={type} inputText={inputText}/>
       </StArticle>
     </>

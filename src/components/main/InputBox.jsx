@@ -38,6 +38,7 @@ export default InputBox
 
 const StInputBox = styled.label`
   display: flex;
+  align-items: center;
   width: 24rem;
   border: 1px solid #e5e7eb;
   border-radius: 0.25rem;
@@ -61,6 +62,7 @@ const StTextArea = styled.div`
   color: #ffffff;
   & > input {
     all: unset;
+    cursor: text;
     width: 100%;
     margin-left: .5rem;
     color: #000000;

@@ -77,6 +77,7 @@ const StList = styled.li`
   padding: 1rem;
   :hover {
     background-color: #f3f4f6;
+    transition-duration: 150ms;
   }
   & > p {
     display: -webkit-box;
