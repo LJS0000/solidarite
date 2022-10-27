@@ -1,11 +1,8 @@
-import Container from "../components/main/Container"
+import MainContainer from "../components/main/MainContainer"
 
 const MainPage = () => {
-
   return(
-    <>
-      <Container/>
-    </>
+    <MainContainer/>
   )
 }
 export default MainPage

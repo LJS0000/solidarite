@@ -1,10 +1,29 @@
 import styled from "styled-components"
 
-const Tab = () => {
+const Tab = ({setType}) => {
+
+  const tabBtn = ["A", "B"]
+
+  const tabHandler = (selected) => {
+    setType(selected.toLowerCase())
+  }
+
   return(
     <StBtnWrap>
-      <button>A Posts</button>
-      <button>B Posts</button>
+      {
+        tabBtn.map((tab, i)=>{
+          return(
+            <button
+              key={tab}
+              onClick={()=>{
+                tabHandler(tab)
+              }}
+            >
+              {tab} Posts
+            </button>
+          )
+        })
+      }
     </StBtnWrap>
   )
 }
@@ -18,5 +37,6 @@ const StBtnWrap = styled.div`
     cursor: pointer;
     padding: .75rem;
     border-radius: .25rem;
+    font-weight: 500;
   }
 `

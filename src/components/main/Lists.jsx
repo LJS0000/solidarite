@@ -1,44 +1,43 @@
-import styled from "styled-components"
-import { useEffect, useState } from "react"
-import { getLists } from "../../api/api"
+import styled from "styled-components";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { useInView } from "react-intersection-observer";
+import { getLists } from "../../api/api";
 
-const Lists = () => {
+const Lists = ({type}) => {
+  const navigate = useNavigate();
+
   const [lists, setLists] = useState([]);
   const [offset, setOffset] = useState(0);
-  const [type, setType] = useState('a');
 
   // 무한스크롤
   const [lastRef, lastArticle] = useInView({
     threshold: 0.8,
     triggerOnce: true,
   });
-  
-
+    
   useEffect(()=>{
-    console.log("요청")
-    console.log(lastArticle);
-if(offset===0 || lastArticle) {
-  getLists(offset, type)
-  .then((res)=>{
-    setLists([...lists, ...res])
-  })
-  setOffset(offset+1)
-}  
-      
-    
-    
-  },[lastArticle])
+    if(offset===0 || lastArticle) {
+      getLists(offset, type)
+      .then((res)=>{
+        setLists([...lists, ...res])
+      })
+      setOffset(offset+1)
+    }  
+  },[lastArticle, type])
+
 
   return(
-    <StListsWrap>
+    <StListsContainer>
       {
         lists?.map((article, id)=>{
           return(
-            
             <StList 
               key={id} 
               ref={lists.length-1? lastRef : null}
+              onClick={()=>{
+                  navigate(`${article.type}?id=${article.id}`)
+              }}
             >
               <h3>
                 <span>{article.id}. </span>
@@ -46,17 +45,16 @@ if(offset===0 || lastArticle) {
               </h3>
               <p>{article.content}</p>
             </StList>
-            
           )
         })
       }
-    </StListsWrap>
+    </StListsContainer>
   )
 }
 export default Lists
 
 
-const StListsWrap = styled.ul`
+const StListsContainer = styled.ul`
   list-style: none;
   padding: 0;
 
@@ -66,7 +64,11 @@ const StListsWrap = styled.ul`
   padding: 1.25rem;
 `
 const StList = styled.li`
+  cursor: pointer;
   padding: 1rem;
+  :hover {
+    background-color: #f3f4f6;
+  }
   & > p {
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -74,7 +76,9 @@ const StList = styled.li`
     overflow: hidden;
   }
   & > h3 {
-    > span {
+    font-size: 1.125rem;
+    font-weight: 500;
+    & > span {
       color: #3b82f6;
     }
   }

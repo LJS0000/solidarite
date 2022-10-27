@@ -26,8 +26,9 @@ const StInputBox = styled.div`
   & > input {
     all: unset;
     width: 100%;
+    margin-left: .5rem;
+    color: #000000;
     ::placeholder {
-      padding: .5rem;
       color: #b1b1b1;
     }
   }

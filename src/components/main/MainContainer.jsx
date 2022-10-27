@@ -1,27 +1,29 @@
 import styled from "styled-components"
-
+import { useState } from "react"
 import InputBox from "./InputBox"
 import Lists from "./Lists"
 import Tab from "./Tab"
 
-const Container = () => {
+const MainContainer = () => {
+
+  const [type, setTtpe] = useState('a');
 
   return(
-    <div>
+    <>
       <StTitle>게시물을 검색해보세요</StTitle>
       <InputBox/>
       <StArticle>
-        <Tab/>
-        <Lists/>
+        <Tab setType={setTtpe}/>
+        <Lists type={type}/>
       </StArticle>
-    </div>
+    </>
   )
 }
-export default Container
+export default MainContainer
 
 const StTitle = styled.p`
   color: #6b7280;
-  font-size: 21px;
+  font-size: 1.5rem;
   text-align: center;
   margin: 35px 0;
 `
