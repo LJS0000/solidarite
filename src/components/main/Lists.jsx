@@ -12,8 +12,7 @@ const Lists = ({type, inputText}) => {
 
   // 무한스크롤
   const [lastRef, lastArticle] = useInView({
-    threshold: 0.8,
-    triggerOnce: true,
+    threshold: 0.5,
   });
   
   // 마운트 및 서치, 타입 업데이트
@@ -34,7 +33,8 @@ const Lists = ({type, inputText}) => {
       })
       setOffset(offset+1)
     }
-  },[lastArticle, inputText])
+  },[lastArticle, inputText, type])
+
   
   return(
     <StListsContainer>
@@ -43,7 +43,6 @@ const Lists = ({type, inputText}) => {
           return(
             <StList 
               key={id} 
-              ref={lists.length-1? lastRef : null}
               onClick={()=>{
                   navigate(`${article.type}?id=${article.id}`)
               }}
@@ -57,6 +56,7 @@ const Lists = ({type, inputText}) => {
           )
         })
       }
+      <StObserver ref={lastRef}/>
     </StListsContainer>
   )
 }
@@ -92,4 +92,8 @@ const StList = styled.li`
       color: #3b82f6;
     }
   }
+`
+
+const StObserver = styled.div`
+  height: 10px;
 `
